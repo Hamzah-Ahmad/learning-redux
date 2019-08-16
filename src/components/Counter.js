@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 class Counter extends Component {
    
     increment = () => {
-       this.props.dispatch({type: 'INCREMENT'});
+       this.props.increment();
     }
     decrement = () => {
-        this.props.dispatch({type: 'DECREMENT'});
+        this.props.decrement();
     }
     render() {
         return (
@@ -25,4 +25,11 @@ function mapStateToProps(state){
         count: state.count
     }
 }
-export default connect(mapStateToProps)(Counter);
+function mapDispatchToProps(dispatch){
+    return{
+        increment: () => {dispatch({type: 'INCREMENT'})},
+        decrement: () => {dispatch({type: 'DECREMENT'})}
+
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
